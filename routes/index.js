@@ -1,7 +1,10 @@
 import express from "express";
 import adminRouter from "./apiRoutes.js";
 
+
+
 const router = express.Router();
+
 
 router.use("/admin", adminRouter);
 

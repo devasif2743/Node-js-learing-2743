@@ -8,6 +8,10 @@ import webrouter from './routes/web.js';
 import sequelize from './config/dbconfig.js';
 import "./models/index.js";
 
+app.set('view engine','ejs')
+
+app.use(express.static('public'));
+
 sequelize.authenticate()
     .then(async() => {
         await sequelize.sync({ alter: true });
