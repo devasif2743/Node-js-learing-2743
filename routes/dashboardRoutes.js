@@ -5,6 +5,7 @@ import {
   getProduct,
   updateProduct,
   deleteProduct,
+  addImage
 } from "../controllers/dashboard/productController.js";
 import tokenAuth from "../middleware/tokenAuth.js";
 import {
@@ -13,6 +14,7 @@ import {
   ProductupdatingValidator,
   ProductdeleteValidator,
 } from "../Validators/registerValidator.js";
+import { upload } from "../middleware/upload.js";
 export const dashboardRouter = express.Router();
 
 dashboardRouter.post("/add-product", tokenAuth, ProductAdding, addProduct);
@@ -31,3 +33,5 @@ dashboardRouter.delete(
   ProductdeleteValidator,
   deleteProduct
 );
+
+dashboardRouter.post("/add-image/:id",tokenAuth, upload.single("image"),addImage);

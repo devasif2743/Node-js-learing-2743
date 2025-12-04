@@ -137,3 +137,31 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+export const addImage=async(req,res)=>{
+const id=req.params.id;
+
+try {
+  const exist=await Product.findByPk(id);
+  if(!exist){
+    return res.status(404).json({status:false,message:"No Product Found"});
+  }  
+
+   if (!req.file) {
+      return res.status(400).json({ message: "Please upload an image" });
+    }
+
+    const imagePath = "/uploads/" + req.file.filename;
+      await exist.update({ image: imagePath });
+
+     res.json({
+      message: "Image uploaded successfully",
+      image: imagePath
+    });
+  
+
+} catch (error) {
+   res.status(500).json({ error: error.message });
+}
+
+}
